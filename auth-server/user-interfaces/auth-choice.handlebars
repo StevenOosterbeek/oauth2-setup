@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Auth server • Authorize the client</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="interface-styling.css">
+    </head>
+    <body>
+        <div class="box-wrapper">
+        <div class="box-wrapper__header authServer">Authorize a client</div>
+        <div class="box-wrapper__content">
+            Do you authorize <strong>{{ clientName }}</strong> for accessing your protected data?
+            <div class="box-wrapper__content--form">
+                <form method="POST" action="{{ authEndpoint }}" onsubmit="return setChoice()" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="client_id" value="{{ client_id }}" />
+                    <input type="hidden" name="redirect_uri" value="{{ redirectUri }}" />
+                    <input type="hidden" name="state" value="{{ state }}" />
+                    <input type="hidden" id="authorized" name="clientIsAuthorized" value="" />
+                    <div class="form__button-wrapper">
+                        <button class="yes">Yes</button>
+                        <button class="no">No</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            var choice,
+                buttons = [
+                { selector: document.getElementsByClassName('yes'), choice: 'yes' },
+                { selector: document.getElementsByClassName('no'), choice: 'no' }];
+
+            buttons.forEach(function(button, index) {
+                (button.selector)[0].addEventListener('click', function() {
+                    choice = buttons[index].choice;
+                });
+            });
+
+            function setChoice () {
+                document.getElementById('authorized').value = choice;
+                return true;
+            }
+
+        </script>
+    </div>
+    </body>
+</html>

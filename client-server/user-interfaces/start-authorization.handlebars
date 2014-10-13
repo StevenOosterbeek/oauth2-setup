@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Client server • Start authorization?</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="interface-styling.css">
+    </head>
+    <body>
+        <div class="box-wrapper">
+        <div class="box-wrapper__header clientServer">Authorize me</div>
+        <div class="box-wrapper__content">
+            Do you want me, <strong>{{ thisClientName }}</strong>, to get authorized for accessing your protected data?
+            <div class="box-wrapper__content--form">
+                <form method="POST" action="/authorize" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" value="{{ authServerName }}" name="authServerName" />
+                    <input type="submit" value="Yes, start the authorization" style="margin:0;" />
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
